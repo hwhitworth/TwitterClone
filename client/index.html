@@ -1,16 +1,24 @@
 <!doctype html>
 <html>
 	<head>
-		<title>MyTweets</title>
+		<title>Twitter Clone</title>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
-		<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	</head>
 	<body>
 		<!--format html below-->
-		<h1>Hello World</h1>
-
-		<script src="components/jquery/dist/jquery.min.js"></script>
-		<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+		
+		<h1 class="logo">TWTR</h1>
+		
+		<div id="tweetContainer">
+			<form action="post">
+				<input type="text" maxlength="175" id="tweetBox">
+				<input type="submit" value="Tweet" id="tweetBtn">
+			</form>
+		</div>
+		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<!--linking code from main js-->
 		<script src="js/main.js"></script>
 	</body>

@@ -1,11 +1,11 @@
 {
-  "name": "mytweets",
+  "name": "Twutter",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "mocha server/serverTests"
   },
-  "author": "Platypi",
+  "author": "Hillary Blaine",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
