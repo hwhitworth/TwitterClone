@@ -2,8 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-function getFileExtension(u) {
-    var arr = url.parse(u).path.split('.');
+function getFileExtension(route) {
+    var arr = route.split('.');
     if(arr.length<=1) {
         return 'html'
     }
@@ -12,7 +12,11 @@ function getFileExtension(u) {
 
 function handleRequests(req, res) {
     var header;
-    var ext = getFileExtension(req.url);
+    var route = url.parse(req.url).path;
+    if(route === '/') {
+        route = '/index.html';
+    }
+    var ext = getFileExtension(route);
     switch (ext) {
         case 'css':
             header = {
@@ -30,43 +34,65 @@ function handleRequests(req, res) {
             };
             break;
         default:
-        
             header = {
                 'Content-Type': 'application/json'
             };
             break;
     }
-    /* file path to the index.html file using path module */
-    var urlPath = function(url) {
-        if(url == "/") {
-            return "/index.html";
+    
+    var filePath;
+    if(route === '/messages') {
+        if(req.method === 'GET') {
+            filePath = './messages.txt';
+            readFile(filePath, header, res);
         }
-        
-        return url;
-    }
-    
-    var filePath = urlPath(url.parse(req.url).path);
-    if(filePath === '/messages') {
-        filePath = './messages.txt';
+        if(req.method === 'POST') {
+            var body = '';
+            req.on('data', function (data) {
+                body += data;
+            });
+            req.on('end', function () {
+                writeTweet(JSON.parse(body), res);
+            });
+        }
     } else {
-        filePath = '../client' + filePath;
+        filePath = '../client' + route;
+        readFile(filePath, header, res);
     }
-    
-    var file = path.join(__dirname, filePath);
-
-    fs.readFile(file, function (err, data) {
-        var statusCode = statusCode || 200;
-        
-        
-        /* writeHead writes a response which includes statusCodes and header*/
-        res.writeHead(statusCode, header);
-
-        /*indicates conclusion of the response https://nodejs.org/api/http.html#http_response_end_data_encoding_callback*/
-        res.end(data);
-    });
 }
 
+function writeTweet(tweet, res) {
+    if(tweet.text && tweet.userName) {
+        console.log(tweet);
+        fs.appendFile(__dirname + '/messages.txt', JSON.stringify(tweet) + '\n',  function(err){
+            console.log(err);
+            res.writeHead(201);
+            res.end();
+        });
+    } else {
+        console.log('server error');
+        res.writeHead(500);
+        res.end();
+    }
+}
 
+function readFile(filePath, header, res) {
+    
+    var file = path.join(__dirname, filePath);
+      fs.readFile(file, function (err, data) {
+       if (err){
+           var statusCode = statusCode || 404;
+           res.writeHead(statusCode, header);
+           res.end(data);
+       }
+           
+      else {
+        var statusCode = statusCode || 200;
+        res.writeHead(statusCode, header);
+        res.end(data);
+      }
+      });
+}
 
 module.exports = {
     handleRequests: handleRequests

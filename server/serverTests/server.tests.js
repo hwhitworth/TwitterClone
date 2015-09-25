@@ -23,14 +23,14 @@ function parseData(body){
 describe('Node Server', function() {
 
   it('Should answer requests for / with a 200 status code', function(done) {
-    request('http://127.0.0.1:4000/', function(error, response, body) {
+    request('http://127.0.0.1:3000/', function(error, response, body) {
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
 
   it('Should answer requests for content according to contentType', function(done) {
-    request('http://127.0.0.1:4000/', function(error, response, body) {
+    request('http://127.0.0.1:3000/', function(error, response, body) {
       expect(response.statusCode).to.equal(200);
       done();
     });
@@ -40,14 +40,14 @@ describe('Node Server', function() {
 
 
   it('Should answer GET requests for /messages with a 200 status code', function(done) {
-    request('http://127.0.0.1:4000/messages', function(error, response, body) {
+    request('http://127.0.0.1:3000/messages', function(error, response, body) {
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
 
   it('should send text data as a string ready to parse', function(done) {
-    request('http://127.0.0.1:4000/messages', function(error, response, body) {
+    request('http://127.0.0.1:3000/messages', function(error, response, body) {
       expect(body).to.be.a('string');
       done();
     });
@@ -56,11 +56,12 @@ describe('Node Server', function() {
   it('should accept POST requests to /messages', function(done) {
     var requestParams = {
       method: 'POST',
-      uri: 'http://127.0.0.1:4000/messages',
-      message: {
-        text: '8-bit High Life cred!'},
-        username: 'bot',
-      };
+      uri: 'http://127.0.0.1:3000/messages',
+      json: {
+        text: '8-bit High Life cred!',
+        userName: 'bot'
+      }
+    };
 
     request(requestParams, function(error, response, body) {
       expect(response.statusCode).to.equal(201);
@@ -71,7 +72,7 @@ describe('Node Server', function() {
   it('should respond with messages that were previously posted', function(done) {
     var requestParams = {
       method: 'POST',
-      uri: 'http://127.0.0.1:4000/messages',
+      uri: 'http://127.0.0.1:3000/messages',
       json: {
         text: '8-bit High Life cred!',
         userName: 'bot'
@@ -79,7 +80,7 @@ describe('Node Server', function() {
     };
 
     request(requestParams, function(error, response, body) {
-      request('http://127.0.0.1:4000/messages', function(error, response, body) {
+      request('http://127.0.0.1:3000/messages', function(error, response, body) {
 
         var messages = parseData(body);
         var len = messages.length - 1;
@@ -91,7 +92,7 @@ describe('Node Server', function() {
   });
 
   it('Should 404 when asked for a nonexistent file', function(done) {
-    request('http://127.0.0.1:4000/arglebargle', function(error, response, body) {
+    request('http://127.0.0.1:3000/arglebargle', function(error, response, body) {
       expect(response.statusCode).to.equal(404);
       done();
     });
