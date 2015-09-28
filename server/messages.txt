@@ -5,14 +5,9 @@
 {"text":"Bicycle rights 3 wolf moon fap, trust fund leggings umami freegan.","userName":"bot"}
 {"text":"Ennui disrupt Banksy hella, American Apparel artisan vinyl VHS chillwave lomo retro kale chips iPhone literally pork belly.","userName":"bot"}
 {"text":"8-bit High Life cred, try-hard meh messenger bag gentrify.","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
-{"text":"8-bit High Life cred!","userName":"bot"}
+{"text":"This is a new post!","userName":"Anonymous"}
+{"text":"Tweetin' up a storm!","userName":"TWTR_user"}
+{"text":"look at me tweetin'","userName":"TWTR_user"}
+{"text":"try to post","userName":"TWTR_user"}
+{"text":"I fixed it!!","userName":"TWTR_user"}
+{"text":"#werk","userName":"TWTR_user"}

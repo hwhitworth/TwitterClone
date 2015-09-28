@@ -13,7 +13,7 @@ function getFileExtension(route) {
 function handleRequests(req, res) {
     var header;
     var route = url.parse(req.url).path;
-    if(route === '/') {
+    if(route === '/' || route === '/post?') {
         route = '/index.html';
     }
     var ext = getFileExtension(route);
